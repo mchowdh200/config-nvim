@@ -2,8 +2,10 @@
 -------------------------------------------------------------------------------
 -- Import/run external modules
 -------------------------------------------------------------------------------
-require('config.mappings')
-require('setup_plugins')
+require 'setup_plugins'
+require 'cmp.nvim_cmp'
+require 'config.mappings'
+require 'config.treesitter'
 
 
 -------------------------------------------------------------------------------
@@ -12,7 +14,7 @@ require('setup_plugins')
 vim.opt.background = 'light'
 vim.opt.termguicolors = true
 vim.g.solarized_extra_hi_groups = 1
-vim.cmd('colorscheme solarized8_low')
+vim.cmd('colorscheme space_vim_theme')
 vim.cmd('hi Comment cterm=italic')
 --vim.opt.guioptions:remove('m,T,r,L')
 vim.opt.guicursor:append('n-v-c:blinkon0')
@@ -23,6 +25,7 @@ vim.opt.guicursor:append('n-v-c:blinkon0')
 
 vim.cmd('autocmd FileType * set formatoptions-=o')
 vim.opt.mouse = 'a'
+vim.opt.updatetime = 500 -- for update latency on floating window
 vim.opt.tabstop = 4
 vim.opt.softtabstop = 4
 vim.opt.shiftwidth = 4
@@ -30,6 +33,7 @@ vim.opt.expandtab = true
 vim.opt.autoindent = true
 vim.opt.fileformat = 'unix'
 vim.wo.wrap = false
+vim.opt.autochdir = true
 
 -- configure backspace so it acts as it should
 vim.opt.backspace = 'eol,start,indent'
@@ -65,6 +69,8 @@ vim.cmd [[
 vim.cmd [[
     command Gstatus Git
     command Gcommit Git commit
+    command Gpush Git push
+    command Gpull Git pull
     command Gdiff Git diff
     autocmd FileType fugitive nmap <buffer> q gq
     autocmd FileType fugitive nmap <buffer> c :Gcommit<CR>

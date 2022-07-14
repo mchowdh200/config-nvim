@@ -7,8 +7,8 @@ local vmap = utils.vmap
 imap('jk', '<Esc>')
 imap('<S-Tab>', '<C-d>')
 nmap('<space>', ':')
-nmap('<up>', '<c-p>') -- arrow keys for completions navigation
-nmap('<down>', '<c-n>')
+-- nmap('<up>', '<c-p>') -- arrow keys for completions navigation
+-- nmap('<down>', '<c-n>')
 nmap('\\', ':pclose<CR>') -- close popup
 
 -- leader maps
