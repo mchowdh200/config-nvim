@@ -1,5 +1,7 @@
 local cmp = require('cmp')
 local lspconfig = require('lspconfig')
+local lspkind = require('lspkind')
+local vim_item = cmp.vim_item
 
 -- TODO look up these options and decide for myself
 vim.opt.completeopt = 'menu,menuone,noselect'
@@ -22,7 +24,7 @@ cmp.setup({
         -- If the completion menu is visible, move to the next item.
         -- If the line is "empty", insert a Tab character.
         -- If the cursor is inside a word, trigger the completion menu.
-        ['<Tab>'] = cmp.mapping(function(fallback)
+        ['q'] = cmp.mapping(function(fallback)
             local col = vim.fn.col('.') - 1
 
             if cmp.visible() then
@@ -35,7 +37,7 @@ cmp.setup({
         end, {'i', 's'}),
 
         -- If the completion menu is visible, move to the previous item.
-        ['<S-Tab>'] = cmp.mapping(function(fallback)
+        ['Q'] = cmp.mapping(function(fallback)
             if cmp.visible() then
                 cmp.select_prev_item(select_opts)
             else
@@ -44,12 +46,41 @@ cmp.setup({
         end, {'i', 's'}),
     }),
     sources = cmp.config.sources({
-        { name = 'nvim_lsp' },
-        { name = 'nvim_lsp_signature_help' },
-        { name = 'buffer' },
-        { name = 'path' },
+        -- { name = 'copilot', group_index = 2, },
+        { name = 'nvim_lsp', max_item_count = 5},
+        { name = 'nvim_lsp_signature_help', max_item_count = 3},
+        { name = 'buffer', max_item_count = 5},
+        { name = 'path', max_item_count = 10},
+    }),
+    -- formatting = {
+    --     format = function (entry, vim_item)
+    --         if entry.source.name == "copilot then" then
+    --             vim_item.kind = Copilot
+    --             vim_item.kind_hl_group = "CmpItemKindSnippet"
+    --             return vim_item
+    --         end
+    --         return lspkind.cmp_format({ })(entry, vim_item)
+    --     end
+    -- },
+    -- sorting = {
+    --     priority_weight = 2,
+    --     comparators = {
+    --         require("copilot_cmp.comparators").prioritize,
+    --         require("copilot_cmp.comparators").score,
 
-    })
+    --         -- Below is the default comparitor list and order for nvim-cmp
+    --         cmp.config.compare.offset,
+    --         -- cmp.config.compare.scopes, --this is commented in nvim-cmp too
+    --         cmp.config.compare.exact,
+    --         cmp.config.compare.score,
+    --         cmp.config.compare.recently_used,
+    --         cmp.config.compare.locality,
+    --         cmp.config.compare.kind,
+    --         cmp.config.compare.sort_text,
+    --         cmp.config.compare.length,
+    --         cmp.config.compare.order,
+    --     },
+    -- },
 })
 
 cmp.setup.cmdline(':', {

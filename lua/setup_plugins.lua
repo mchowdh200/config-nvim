@@ -22,13 +22,38 @@ require('packer').startup(function(use)
 
     -- Autocompletions --------------------------------------------------------
     use 'neovim/nvim-lspconfig'
+    use 'onsails/lspkind.nvim'
     use 'hrsh7th/cmp-nvim-lsp'
     use 'hrsh7th/cmp-nvim-lsp-signature-help'
     use 'hrsh7th/cmp-buffer'
     use 'hrsh7th/cmp-path'
     use 'hrsh7th/cmp-cmdline'
     use 'hrsh7th/nvim-cmp'
-    use 'github/copilot.vim'
+    use 'github/copilot.vim' -- installed/setup for auth purposes
+
+    -- use { "zbirenbaum/copilot.lua",
+    --     after = {}, --whichever statusline plugin you use here
+    --     config = function ()
+    --         vim.defer_fn(function() require("copilot").setup({
+    --             -- TODO write a function that returns the setup config
+    --             -- and keep that in a separate module
+    --             cmp = {
+    --                 enabled = true,
+    --                 method = "getPanelCompletions",
+    --             },
+    --             panel = { -- no config options yet
+    --                 enabled = true,
+    --             },
+    --             ft_disable = {},
+    --             server_opts_overrides = {},
+    --         }) end, 100)
+    --     end,
+    -- }
+
+    -- use {
+    --     "zbirenbaum/copilot-cmp",
+    --     after = 'copilot.lua'
+    -- }
 
     -- Treesitter -------------------------------------------------------------
     use {
@@ -37,10 +62,10 @@ require('packer').startup(function(use)
     }
     -- at the moment python indentation breaks with treesitter
     -- so fallback to this for now and check back periodically
-    use {
-        'Vimjas/vim-python-pep8-indent',
-        run = function() vim.cmd('let g:pymode_indent=0') end
-    }
+    -- use {
+    --     'Vimjas/vim-python-pep8-indent',
+    --     run = function() vim.cmd('let g:pymode_indent=0') end
+    -- }
 
     -- Telescope --------------------------------------------------------------
     use {
