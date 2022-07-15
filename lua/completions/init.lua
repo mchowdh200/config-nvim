@@ -45,6 +45,7 @@ cmp.setup({
     }),
     sources = cmp.config.sources({
         { name = 'nvim_lsp' },
+        { name = 'nvim_lsp_signature_help' },
         { name = 'buffer' },
         { name = 'path' },
 
@@ -62,10 +63,7 @@ cmp.setup.cmdline('/', {
 })
 
 
-
 -- Customize diagnostics -----------------------------------------------------
-
--- TODO incorporate this into on_attach function
 -- open float window when cursor is hovering above point
 vim.api.nvim_create_autocmd("CursorHold", {
     buffer = bufnr,
@@ -89,19 +87,50 @@ vim.api.nvim_create_autocmd("CursorHold", {
 vim.diagnostic.config({
     virtual_text = true,
     signs = true,
-    underline = false,
+    underline = true,
     update_in_insert = false,
     severity_sort = true,
 })
 
 
+-- -- Setup language servers ----------------------------------------------------
 
--- Setup language servers ----------------------------------------------------
-local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
-lspconfig.pyright.setup {
-    capabilities = capabilities
-}
-lspconfig.bashls.setup{
-    capabilities = capabilities
-}
+-- local nmap = function(keys, func, desc)
+--     if desc then
+--         desc = 'LSP: ' .. desc
+--     end
+--     vim.keymap.set('n', keys, func, { buffer = bufnr, desc = desc })
+-- end
 
+-- -- This will run when an LSP attaches to buffer
+-- local on_attach = function(_, bufnr)
+--     nmap('gd', vim.lsp.buf.definition, '[G]oto [D]efinition')
+--     nmap('gi', vim.lsp.buf.implementation, '[G]oto [I]mplementation')
+--     nmap('gr', require('telescope.builtin').lsp_references)
+
+--     nmap('<leader>ds',
+--         require('telescope.builtin').lsp_document_symbols,
+--         '[D]ocument [S]ymbols')
+--     nmap('<leader>ws',
+--         require('telescope.builtin').lsp_dynamic_workspace_symbols,
+--         '[W]orkspace [S]ymbols')
+
+--     nmap('K', vim.lsp.buf.hover, 'Hover Documentation')
+--     nmap('<C-k>', vim.lsp.buf.signature_help, 'Signature Documentation')
+-- end
+
+-- vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(
+--     vim.lsp.handlers.hover,
+--     { border = "rounded", }
+-- )
+
+-- local capabilities = require('cmp_nvim_lsp').update_capabilities(
+--     vim.lsp.protocol.make_client_capabilities())
+-- lspconfig.pyright.setup {
+--     capabilities = capabilities,
+--     on_attach = on_attach,
+-- }
+-- lspconfig.bashls.setup{
+--     capabilities = capabilities,
+--     on_attach = on_attach,
+-- }

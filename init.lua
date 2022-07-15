@@ -3,7 +3,8 @@
 -- Import/run external modules
 -------------------------------------------------------------------------------
 require 'setup_plugins'
-require 'cmp.nvim_cmp'
+require 'completions'
+require 'lsp'
 require 'config.mappings'
 require 'config.treesitter'
 
@@ -11,13 +12,18 @@ require 'config.treesitter'
 -------------------------------------------------------------------------------
 -- Appearance
 -------------------------------------------------------------------------------
-vim.opt.background = 'light'
+vim.opt.background = 'dark'
 vim.opt.termguicolors = true
-vim.g.solarized_extra_hi_groups = 1
-vim.cmd('colorscheme space_vim_theme')
-vim.cmd('hi Comment cterm=italic')
---vim.opt.guioptions:remove('m,T,r,L')
+
+require('config.catppuccin_config')
+vim.g.catppuccin_flavour = "frappe" -- latte, frappe, macchiato, mocha
+vim.cmd('colorscheme catppuccin')
+
 vim.opt.guicursor:append('n-v-c:blinkon0')
+-- vim.g.solarized_extra_hi_groups = 1
+-- vim.cmd('colorscheme space_vim_theme')
+-- vim.cmd('hi Comment cterm=italic')
+--vim.opt.guioptions:remove('m,T,r,L')
 
 -------------------------------------------------------------------------------
 -- Editor stuff
@@ -39,6 +45,7 @@ vim.opt.autochdir = true
 vim.opt.backspace = 'eol,start,indent'
 vim.opt.whichwrap:append('<,>,h,l')
 vim.opt.ruler = true
+vim.opt.signcolumn = 'yes'
 vim.opt.showcmd = true
 vim.opt.showmode = true
 vim.opt.scrolloff = 4
@@ -100,4 +107,5 @@ vim.cmd [[
 -- statusline
 -------------------------------------------------------------------------------
 vim.opt.laststatus = 2
-vim.opt.statusline = ' %m %f%= %{FugitiveStatusline()} %{&fileformat}  %{&fileencoding}  %{&filetype}  %p%%  LN %l:%c '
+-- vim.opt.statusline = ' %m %f%= %{FugitiveStatusline()} %{&fileformat}  %{&fileencoding}  %{&filetype}  %p%%  LN %l:%c '
+vim.opt.statusline = ' %m %{expand(\'%:p:h:t\')}/%t%= %{FugitiveStatusline()} %{&fileformat}  %{&fileencoding}  %{&filetype}  %p%%  LN %l:%c '

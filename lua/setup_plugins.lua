@@ -23,6 +23,7 @@ require('packer').startup(function(use)
     -- Autocompletions --------------------------------------------------------
     use 'neovim/nvim-lspconfig'
     use 'hrsh7th/cmp-nvim-lsp'
+    use 'hrsh7th/cmp-nvim-lsp-signature-help'
     use 'hrsh7th/cmp-buffer'
     use 'hrsh7th/cmp-path'
     use 'hrsh7th/cmp-cmdline'
@@ -33,6 +34,12 @@ require('packer').startup(function(use)
     use {
         'nvim-treesitter/nvim-treesitter',
         run = function() require('nvim-treesitter.install').update({ with_sync = true }) end,
+    }
+    -- at the moment python indentation breaks with treesitter
+    -- so fallback to this for now and check back periodically
+    use {
+        'Vimjas/vim-python-pep8-indent',
+        run = function() vim.cmd('let g:pymode_indent=0') end
     }
 
     -- Telescope --------------------------------------------------------------
@@ -85,6 +92,9 @@ require('packer').startup(function(use)
     use 'chriskempson/vim-tomorrow-theme'
     use 'ErichDonGubler/vim-sublime-monokai'
     use 'jnurmine/Zenburn'
+    use {
+        'catppuccin/nvim', as='catppuccin'
+    }
 
     -- Automatically set up your configuration after cloning packer.nvim
     -- Put this at the end after all plugins
