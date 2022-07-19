@@ -3,10 +3,13 @@
 -- Import/run external modules
 -------------------------------------------------------------------------------
 require 'setup_plugins'
+require 'config.lualine'
+require 'config.lspkind'
 require 'completions'
 require 'lsp'
 require 'config.mappings'
 require 'config.treesitter'
+-- require 'config.nvim_web_devicons'
 
 
 -------------------------------------------------------------------------------
@@ -56,6 +59,7 @@ vim.opt.smartcase = true
 vim.opt.clipboard = 'unnamedplus' -- linux: install xclip to work
 vim.opt.autoread = true
 vim.opt.splitbelow = true
+vim.opt.splitright = true
 
 -------------------------------------------------------------------------------
 -- Focus mode
@@ -97,15 +101,9 @@ vim.cmd [[
 
 -- Haskell
 
--- Latex
-vim.cmd [[
-    autocmd FileType tex,latex nnoremap <leader>c :!pdflatex %<cr>
-    autocmd FileType tex,latex nnoremap <leader>b :!bibtex %:r<cr>
-]]
-
 -------------------------------------------------------------------------------
 -- statusline
 -------------------------------------------------------------------------------
-vim.opt.laststatus = 2
+-- vim.opt.laststatus = 2
 -- vim.opt.statusline = ' %m %f%= %{FugitiveStatusline()} %{&fileformat}  %{&fileencoding}  %{&filetype}  %p%%  LN %l:%c '
-vim.opt.statusline = ' %m %{expand(\'%:p:h:t\')}/%t%= %{FugitiveStatusline()} %{&fileformat}  %{&fileencoding}  %{&filetype}  %p%%  LN %l:%c '
+-- vim.opt.statusline = ' %m %{expand(\'%:p:h:t\')}/%t%= %{FugitiveStatusline()} %{&fileformat}  %{&fileencoding}  %{&filetype}  %p%%  LN %l:%c '

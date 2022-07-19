@@ -2,6 +2,7 @@
 -- Setup language servers
 ------------------------------------------------------------------------------
 local lspconfig = require('lspconfig')
+require("nvim-lsp-installer").setup()
 
 -- This will run when an LSP attaches to buffer
 local on_attach = function(_, bufnr)
@@ -45,3 +46,23 @@ lspconfig.bashls.setup{
     capabilities = capabilities,
     on_attach = on_attach,
 }
+lspconfig.sumneko_lua.setup{
+    settings = {
+        Lua = {
+            runtime = {
+                version = 'LuaJIT',
+            },
+            diagnostics = {
+                globals = { 'vim' },
+            },
+            workspace = {
+                library = vim.api.nvim_get_runtime_file('', true),
+            },
+        },
+    },
+    telemetry = { false },
+    capabilities = capabilities,
+    on_attach = on_attach,
+}
+
+

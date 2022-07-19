@@ -22,6 +22,7 @@ require('packer').startup(function(use)
 
     -- Autocompletions --------------------------------------------------------
     use 'neovim/nvim-lspconfig'
+    use 'williamboman/nvim-lsp-installer'
     use 'onsails/lspkind.nvim'
     use 'hrsh7th/cmp-nvim-lsp'
     use 'hrsh7th/cmp-nvim-lsp-signature-help'
@@ -31,6 +32,7 @@ require('packer').startup(function(use)
     use 'hrsh7th/nvim-cmp'
     use 'github/copilot.vim' -- installed/setup for auth purposes
 
+    -- This isn't fully baked yet so I'm not including it for now.
     -- use { "zbirenbaum/copilot.lua",
     --     after = {}, --whichever statusline plugin you use here
     --     config = function ()
@@ -55,6 +57,7 @@ require('packer').startup(function(use)
     --     after = 'copilot.lua'
     -- }
 
+
     -- Treesitter -------------------------------------------------------------
     use {
         'nvim-treesitter/nvim-treesitter',
@@ -62,10 +65,10 @@ require('packer').startup(function(use)
     }
     -- at the moment python indentation breaks with treesitter
     -- so fallback to this for now and check back periodically
-    -- use {
-    --     'Vimjas/vim-python-pep8-indent',
-    --     run = function() vim.cmd('let g:pymode_indent=0') end
-    -- }
+    use {
+        'Vimjas/vim-python-pep8-indent',
+        run = function() vim.cmd('let g:pymode_indent=0') end
+    }
 
     -- Telescope --------------------------------------------------------------
     use {
@@ -100,10 +103,18 @@ require('packer').startup(function(use)
         },
     }
 
-    -- Misc Editor stuff ------------------------------------------------------
+    -- Misc Editor ui stuff --------------------------------------------------
+    -- use 'liuchengxu/vista.vim'
+    use 'nvim-lualine/lualine.nvim'
     use 'junegunn/goyo.vim'
     use 'junegunn/limelight.vim'
-    -- use { 'lukas-reineke/indent-blankline.nvim', } -- TODO fix toggle
+    use 'kyazdani42/nvim-web-devicons'
+    use { 'lukas-reineke/indent-blankline.nvim', } -- TODO fix toggle
+
+    -- Orgmode ---------------------------------------------------------------
+    use {'nvim-orgmode/orgmode', config = function()
+        require('orgmode').setup{}
+    end }
 
     -- Tmux -------------------------------------------------------------------
     use 'tmux-plugins/vim-tmux-focus-events'
@@ -118,7 +129,9 @@ require('packer').startup(function(use)
     use 'ErichDonGubler/vim-sublime-monokai'
     use 'jnurmine/Zenburn'
     use {
-        'catppuccin/nvim', as='catppuccin'
+        'catppuccin/nvim',
+        as='catppuccin',
+        run = 'CatpuccinCompile',
     }
 
     -- Automatically set up your configuration after cloning packer.nvim

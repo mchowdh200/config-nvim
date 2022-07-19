@@ -5,7 +5,6 @@ local vmap = utils.vmap
 
 -- basic remaps
 imap('jk', '<Esc>')
-imap('<S-Tab>', '<C-d>')
 nmap('<space>', ':')
 -- nmap('<up>', '<c-p>') -- arrow keys for completions navigation
 -- nmap('<down>', '<c-n>')
@@ -19,3 +18,11 @@ nmap('<leader>k', '<C-W><C-K>')
 nmap('<leader>l', '<C-W><C-L>')
 nmap('<leader>n', ':set invnumber<CR>')
 nmap('<leader>\\', ':noh<CR>')
+nmap('q', ':silent! normal za<CR>:echo \'\'<CR>') -- toggle folding
+
+-- ok, _ = pcall(require, 'copilot')
+-- if ok then
+--     vim.cmd[[
+--         imap <silent><script><expr> <S-Tab> copilot#Accept("\<CR>")
+--     ]]
+-- end
