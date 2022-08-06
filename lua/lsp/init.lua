@@ -4,8 +4,21 @@
 local lspconfig = require('lspconfig')
 require("nvim-lsp-installer").setup()
 
+local signs = {
+  { name = "DiagnosticSignError", text = "" },
+  { name = "DiagnosticSignWarn", text = "" },
+  { name = "DiagnosticSignHint", text = "" },
+  { name = "DiagnosticSignInfo", text = "" },
+}
+
+for _, sign in ipairs(signs) do
+  vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = "" })
+end
+
+
 -- This will run when an LSP attaches to buffer
-local on_attach = function(_, bufnr)
+local on_attach = function(client, bufnr)
+
 
     local nmap = function(keys, func, desc)
         if desc then
@@ -64,5 +77,3 @@ lspconfig.sumneko_lua.setup{
     capabilities = capabilities,
     on_attach = on_attach,
 }
-
-

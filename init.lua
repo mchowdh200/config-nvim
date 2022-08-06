@@ -1,15 +1,6 @@
 
--------------------------------------------------------------------------------
--- Import/run external modules
--------------------------------------------------------------------------------
 require 'setup_plugins'
-require 'config.lualine'
-require 'config.lspkind'
-require 'completions'
-require 'lsp'
 require 'config.mappings'
-require 'config.treesitter'
--- require 'config.nvim_web_devicons'
 
 
 -------------------------------------------------------------------------------
@@ -23,10 +14,6 @@ vim.g.catppuccin_flavour = "frappe" -- latte, frappe, macchiato, mocha
 vim.cmd('colorscheme catppuccin')
 
 vim.opt.guicursor:append('n-v-c:blinkon0')
--- vim.g.solarized_extra_hi_groups = 1
--- vim.cmd('colorscheme space_vim_theme')
--- vim.cmd('hi Comment cterm=italic')
---vim.opt.guioptions:remove('m,T,r,L')
 
 -------------------------------------------------------------------------------
 -- Editor stuff
@@ -88,22 +75,3 @@ vim.cmd [[
     autocmd FileType fugitiveblame nmap <buffer> q gq
     autocmd FileType git nmap <buffer> q :q<CR>
 ]]
--- This function doesnt seem to be defined
--- vim.api.nvim_add_user_command('Gstatus', 'Git', { nargs=0 })
--- vim.api.nvim_add_user_command('Gdiff', 'Git diff', { nargs=0 })
-
--------------------------------------------------------------------------------
--- Language specific settings
--------------------------------------------------------------------------------
-
--- Python
-
-
--- Haskell
-
--------------------------------------------------------------------------------
--- statusline
--------------------------------------------------------------------------------
--- vim.opt.laststatus = 2
--- vim.opt.statusline = ' %m %f%= %{FugitiveStatusline()} %{&fileformat}  %{&fileencoding}  %{&filetype}  %p%%  LN %l:%c '
--- vim.opt.statusline = ' %m %{expand(\'%:p:h:t\')}/%t%= %{FugitiveStatusline()} %{&fileformat}  %{&fileencoding}  %{&filetype}  %p%%  LN %l:%c '

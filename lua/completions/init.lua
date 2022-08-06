@@ -75,7 +75,7 @@ vim.api.nvim_create_autocmd("CursorHold", {
         local opts = {
             focusable = false,
             close_events = {
-                "BufLeave", "CursorMoved", 
+                "BufLeave", "CursorMoved",
                 "InsertEnter", "FocusLost"
             },
             border = 'single',
@@ -90,6 +90,7 @@ vim.api.nvim_create_autocmd("CursorHold", {
 
 vim.diagnostic.config({
     virtual_text = true,
+    -- virtual_lines = true,
     signs = true,
     underline = true,
     update_in_insert = false,

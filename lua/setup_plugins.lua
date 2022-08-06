@@ -20,48 +20,55 @@ require('packer').startup(function(use)
     -- Git stuff --------------------------------------------------------------
     use 'tpope/vim-fugitive'
 
-    -- Autocompletions --------------------------------------------------------
-    use 'neovim/nvim-lspconfig'
-    use 'williamboman/nvim-lsp-installer'
-    use 'onsails/lspkind.nvim'
-    use 'hrsh7th/cmp-nvim-lsp'
-    use 'hrsh7th/cmp-nvim-lsp-signature-help'
-    use 'hrsh7th/cmp-buffer'
-    use 'hrsh7th/cmp-path'
-    use 'hrsh7th/cmp-cmdline'
-    use 'hrsh7th/nvim-cmp'
-    use 'github/copilot.vim' -- installed/setup for auth purposes
-
-    -- This isn't fully baked yet so I'm not including it for now.
-    -- use { "zbirenbaum/copilot.lua",
-    --     after = {}, --whichever statusline plugin you use here
-    --     config = function ()
-    --         vim.defer_fn(function() require("copilot").setup({
-    --             -- TODO write a function that returns the setup config
-    --             -- and keep that in a separate module
-    --             cmp = {
-    --                 enabled = true,
-    --                 method = "getPanelCompletions",
-    --             },
-    --             panel = { -- no config options yet
-    --                 enabled = true,
-    --             },
-    --             ft_disable = {},
-    --             server_opts_overrides = {},
-    --         }) end, 100)
-    --     end,
+    -- lsp and cmp ------------------------------------------------------------
+    -- use { 'jose-elias-alvarez/null-ls.nvim',
+    --     config = function() require('config.null_ls_setup').setup() end,
+    --     requires = { 'nvim-lua/plenary.nvim' },
     -- }
+
+    use {
+
+        { 'onsails/lspkind.nvim', config = [[require('config.lspkind')]] },
+        {
+            'neovim/nvim-lspconfig',
+            requires = {
+                'onsails/lspkind.nvim',
+                'williamboman/nvim-lsp-installer'
+            },
+            after = 'lspkind.nvim',
+            config = [[require('lsp')]]
+        },
+        { 'williamboman/nvim-lsp-installer' }, -- TODO use mason.nvim
+        {
+            'hrsh7th/nvim-cmp',
+            requires = {
+                'hrsh7th/cmp-nvim-lsp',
+                'hrsh7th/cmp-nvim-lsp-signature-help',
+                'hrsh7th/cmp-buffer',
+                'hrsh7th/cmp-path',
+                'hrsh7th/cmp-cmdline',
+            },
+            after = 'lspkind.nvim',
+            config = [[require('completions')]]
+        },
+        {'hrsh7th/cmp-nvim-lsp'},
+        {'hrsh7th/cmp-nvim-lsp-signature-help'},
+        {'hrsh7th/cmp-buffer'},
+        {'hrsh7th/cmp-path'},
+        {'hrsh7th/cmp-cmdline'},
+    }
 
     -- use {
-    --     "zbirenbaum/copilot-cmp",
-    --     after = 'copilot.lua'
+    --    'onsails/lspkind.nvim',
+    --     config = [[require('config.lspkind')]],
     -- }
-
+    use 'github/copilot.vim'
 
     -- Treesitter -------------------------------------------------------------
     use {
         'nvim-treesitter/nvim-treesitter',
         run = function() require('nvim-treesitter.install').update({ with_sync = true }) end,
+        config = [[require('config.treesitter')]],
     }
     -- at the moment python indentation breaks with treesitter
     -- so fallback to this for now and check back periodically
@@ -105,15 +112,21 @@ require('packer').startup(function(use)
 
     -- Misc Editor ui stuff --------------------------------------------------
     -- use 'liuchengxu/vista.vim'
-    use 'nvim-lualine/lualine.nvim'
+    use { 'nvim-lualine/lualine.nvim',
+        config = [[require('config.lualine')]],
+    }
     use 'junegunn/goyo.vim'
     use 'junegunn/limelight.vim'
     use 'kyazdani42/nvim-web-devicons'
-    use { 'lukas-reineke/indent-blankline.nvim', } -- TODO fix toggle
+    use { 'lukas-reineke/indent-blankline.nvim',
+        config= [[require('config.indent-blankline')]]
+    } -- TODO fix toggle
 
     -- Orgmode ---------------------------------------------------------------
     use {'nvim-orgmode/orgmode', config = function()
-        require('orgmode').setup{}
+        local o = require('orgmode')
+        o.setup{}
+        o.setup_ts_grammar()
     end }
 
     -- Tmux -------------------------------------------------------------------
@@ -133,6 +146,7 @@ require('packer').startup(function(use)
         as='catppuccin',
         run = 'CatpuccinCompile',
     }
+
 
     -- Automatically set up your configuration after cloning packer.nvim
     -- Put this at the end after all plugins
