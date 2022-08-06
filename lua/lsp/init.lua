@@ -2,7 +2,6 @@
 -- Setup language servers
 ------------------------------------------------------------------------------
 local lspconfig = require('lspconfig')
-require("nvim-lsp-installer").setup()
 
 local signs = {
   { name = "DiagnosticSignError", text = "" },
