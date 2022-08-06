@@ -29,6 +29,7 @@ require('packer').startup(function(use)
     use {
 
         { 'onsails/lspkind.nvim', config = [[require('config.lspkind')]] },
+
         {
             'neovim/nvim-lspconfig',
             requires = {
@@ -42,10 +43,21 @@ require('packer').startup(function(use)
             },
             config = [[require('lsp')]]
         },
-        -- { 'williamboman/nvim-lsp-installer' }, -- TODO use mason.nvim
-        { 'williamboman/mason.nvim',
-          config = [[require('config.mason')]]
+
+        {
+            'williamboman/mason.nvim',
+            config = [[require('config.mason')]]
         },
+
+        {
+            'jose-elias-alvarez/null-ls.nvim',
+            after = {
+                'mason.nvim',
+                'nvim-lspconfig',
+            },
+            config = [[require('config.null_ls_setup')]]
+        },
+
         {
             'hrsh7th/nvim-cmp',
             requires = {
