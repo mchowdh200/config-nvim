@@ -14,7 +14,7 @@ null_ls.setup({
         if client.supports_method("textDocument/formatting") then
 
             vim.cmd[[
-                command Fmt :lua vim.lsp.buf.format()<CR>
+                command! Fmt :lua vim.lsp.buf.format({timeout_ms = 5000})<CR>
             ]]
             vim.cmd[[
                 nnoremap <leader>f :Fmt<CR>

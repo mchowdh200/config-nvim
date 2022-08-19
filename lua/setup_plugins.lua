@@ -20,21 +20,15 @@ require('packer').startup(function(use)
     -- Git stuff --------------------------------------------------------------
     use 'tpope/vim-fugitive'
 
-    -- lsp and cmp ------------------------------------------------------------
-    -- use { 'jose-elias-alvarez/null-ls.nvim',
-    --     config = function() require('config.null_ls_setup').setup() end,
-    --     requires = { 'nvim-lua/plenary.nvim' },
-    -- }
-
+    -- cmp, dap, lsp ----------------------------------------------------------
     use {
 
+        -- lsp -----------------------------------
         { 'onsails/lspkind.nvim', config = [[require('config.lspkind')]] },
-
         {
             'neovim/nvim-lspconfig',
             requires = {
                 'onsails/lspkind.nvim',
-                -- 'williamboman/nvim-lsp-installer'
                 'williamboman/mason.nvim',
             },
             after = {
@@ -58,6 +52,23 @@ require('packer').startup(function(use)
             config = [[require('config.null_ls_setup')]]
         },
 
+        -- dap -----------------------------------
+        {
+            'mfussenegger/nvim-dap',
+            requires = { 'theHamsta/nvim-dap-virtual-text', },
+            config = [[require('config.nvim_dap')]]
+        },
+        {
+            'theHamsta/nvim-dap-virtual-text',
+            config=[[require('config.dap_virtual_text')]],
+        },
+        {
+            'rcarriga/nvim-dap-ui',
+            requires = 'mfussenegger/nvim-dap',
+            config=[[require('config.dap_ui')]],
+        },
+
+        -- cmp -----------------------------------
         {
             'hrsh7th/nvim-cmp',
             requires = {
