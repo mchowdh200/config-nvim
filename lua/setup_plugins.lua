@@ -69,6 +69,7 @@ require('packer').startup(function(use)
         },
 
         -- cmp -----------------------------------
+
         {
             'hrsh7th/nvim-cmp',
             requires = {
@@ -79,13 +80,14 @@ require('packer').startup(function(use)
                 'hrsh7th/cmp-cmdline',
             },
             after = 'lspkind.nvim',
-            config = [[require('completions')]]
+            config = [[require('completions')]],
+
         },
-        {'hrsh7th/cmp-nvim-lsp'},
-        {'hrsh7th/cmp-nvim-lsp-signature-help'},
-        {'hrsh7th/cmp-buffer'},
-        {'hrsh7th/cmp-path'},
-        {'hrsh7th/cmp-cmdline'},
+        { 'hrsh7th/cmp-nvim-lsp' },
+        { 'hrsh7th/cmp-nvim-lsp-signature-help' },
+        { 'hrsh7th/cmp-buffer' },
+        { 'hrsh7th/cmp-path' },
+        { 'hrsh7th/cmp-cmdline' },
     }
 
     -- use {
@@ -136,7 +138,7 @@ require('packer').startup(function(use)
         },
         {
             'nvim-telescope/telescope-fzf-native.nvim',
-            run = 'make',
+            run = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' ,
         },
     }
 
