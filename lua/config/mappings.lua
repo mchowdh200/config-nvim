@@ -20,6 +20,10 @@ nmap('<leader>n', ':set invnumber<CR>')
 nmap('<leader>\\', ':noh<CR>')
 nmap('q', ':silent! normal za<CR>:echo \'\'<CR>') -- toggle folding
 
+vim.cmd[[
+autocmd FileType tex nnoremap <buffer> <F5> :!pdflatex %<CR>
+]]
+
 -- ok, _ = pcall(require, 'copilot')
 -- if ok then
 --     vim.cmd[[
