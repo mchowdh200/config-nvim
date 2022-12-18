@@ -51,6 +51,17 @@ vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(
 -- local capabilities = require('cmp_nvim_lsp').update_capabilities(
 local capabilities = require('cmp_nvim_lsp').default_capabilities(
     vim.lsp.protocol.make_client_capabilities())
+
+------------------------------------------------------------------------------
+-- Setup servers
+------------------------------------------------------------------------------
+lspconfig.clangd.setup{
+    on_attach = on_attach,
+    capabilities = capabilities,
+    flags = {
+        debounce_text_changes = 150,
+    },
+}
 lspconfig.pyright.setup {
     capabilities = capabilities,
     on_attach = on_attach,

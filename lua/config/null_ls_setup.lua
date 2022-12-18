@@ -9,6 +9,11 @@ null_ls.setup({
             command = "black",
         }),
         null_ls.builtins.formatting.isort,
+        -- clang-format
+        null_ls.builtins.formatting.clang_format.with({
+            command = "clang-format",
+            -- args = { "--assume-filename", "$FILENAME" },
+        }),
     },
     on_attach = function(client, bufnr)
         if client.supports_method("textDocument/formatting") then
