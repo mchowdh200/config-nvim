@@ -30,6 +30,7 @@ vim.opt.autoindent = true
 vim.opt.fileformat = 'unix'
 vim.wo.wrap = false
 vim.opt.autochdir = true
+vim.opt.swapfile = false
 
 -- configure backspace so it acts as it should
 vim.opt.backspace = 'eol,start,indent'
