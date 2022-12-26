@@ -9,10 +9,25 @@ null_ls.setup({
             command = "black",
         }),
         null_ls.builtins.formatting.isort,
-        -- clang-format
         null_ls.builtins.formatting.clang_format.with({
             command = "clang-format",
-            -- args = { "--assume-filename", "$FILENAME" },
+            args = {
+                "--style",
+                "{ BasedOnStyle: llvm,"..
+                    "IndentWidth: 4,"..
+                    "AlignAfterOpenBracket: BlockIndent,"..
+                    "ExperimentalAutoDetectBinPacking: false,"..
+                    "AlwaysBreakAfterDefinitionReturnType: false,"..
+                    -- "AlwaysBreakAfterReturnType: false,"..
+                    "BinPackArguments: false,"..
+                    "BinPackParameters: false,"..
+                    "AllowAllParametersOfDeclarationOnNextLine: false,"..
+                    -- "AlignArrayOfStructures: Right"..
+                    "ArrayInitializerAlignmentStyle: Right,"..
+                    "ColumnLimit: 80}"
+                }
+
+            -- command = "clang-format --style='{BasedOnStyle: LLVM, IndentWidth: 4}'",
         }),
     },
     on_attach = function(client, bufnr)
