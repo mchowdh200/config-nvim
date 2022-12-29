@@ -15,15 +15,13 @@ null_ls.setup({
                 "--style",
                 "{ BasedOnStyle: llvm,"..
                     "IndentWidth: 4,"..
+                    "PenaltyReturnTypeOnItsOwnLine: 1000000,"..
                     "AlignAfterOpenBracket: BlockIndent,"..
                     "ExperimentalAutoDetectBinPacking: false,"..
-                    "AlwaysBreakAfterDefinitionReturnType: false,"..
-                    -- "AlwaysBreakAfterReturnType: false,"..
+                    "AlwaysBreakAfterDefinitionReturnType: None,"..
                     "BinPackArguments: false,"..
                     "BinPackParameters: false,"..
                     "AllowAllParametersOfDeclarationOnNextLine: false,"..
-                    -- "AlignArrayOfStructures: Right"..
-                    "ArrayInitializerAlignmentStyle: Right,"..
                     "ColumnLimit: 80}"
                 }
 
