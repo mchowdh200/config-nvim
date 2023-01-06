@@ -11,7 +11,7 @@ vim.opt.termguicolors = true
 
 require('config.catppuccin_config')
 -- vim.g.catppuccin_flavour = "frappe" -- latte, frappe, macchiato, mocha
-vim.cmd('colorscheme catppuccin-frappe')
+vim.cmd('colorscheme catppuccin-mocha')
 
 vim.opt.guicursor:append('n-v-c:blinkon0')
 
@@ -98,3 +98,14 @@ vim.api.nvim_create_autocmd('FileType', {
   end
 })
 
+-------------------------------------------------------------------------------
+-- Workarounds
+-------------------------------------------------------------------------------
+local notify = vim.notify
+vim.notify = function(msg, ...)
+    if msg:match("warning: multiple different client offset_encodings") then
+        return
+    end
+
+    notify(msg, ...)
+end
