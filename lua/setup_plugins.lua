@@ -111,6 +111,8 @@ require('packer').startup(function(use)
         run = function() vim.cmd('let g:pymode_indent=0') end
     }
 
+    use 'raivivek/vim-snakemake'
+
     -- Telescope --------------------------------------------------------------
     use {
         {
@@ -136,11 +138,12 @@ require('packer').startup(function(use)
         {
             'nvim-telescope/telescope-frecency.nvim',
             after = 'telescope.nvim',
-            requires = 'tami5/sqlite.lua',
+            requires = 'kkharji/sqlite.lua',
         },
         {
             'nvim-telescope/telescope-fzf-native.nvim',
-            run = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' ,
+            run = 'make',
+            --run = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' ,
         },
     }
 

@@ -70,7 +70,7 @@ lspconfig.bashls.setup{
     capabilities = capabilities,
     on_attach = on_attach,
 }
-lspconfig.sumneko_lua.setup{
+lspconfig.lua_ls.setup{
     settings = {
         Lua = {
             runtime = {
@@ -81,6 +81,7 @@ lspconfig.sumneko_lua.setup{
             },
             workspace = {
                 library = vim.api.nvim_get_runtime_file('', true),
+                checkThirdParty = false,
             },
         },
     },
