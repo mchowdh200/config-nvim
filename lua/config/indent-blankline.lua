@@ -1,5 +1,8 @@
-require("indent_blankline").setup {
-    -- for example, context is off by default, use this to turn it on
+local indent_blankline = require("indent_blankline")
+indent_blankline.setup {
     show_current_context = false,
     show_current_context_start = false,
+    enabled = false,
+    use_treesitter = true,
 }
+

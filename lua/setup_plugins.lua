@@ -156,8 +156,16 @@ require('packer').startup(function(use)
     use 'junegunn/limelight.vim'
     use 'kyazdani42/nvim-web-devicons'
     use { 'lukas-reineke/indent-blankline.nvim',
-        config= [[require('config.indent-blankline')]]
+        config=function()
+            require('config.indent-blankline')
+        end
     } -- TODO fix toggle
+
+    use { 'HampusHauffman/block.nvim',
+        config = function()
+            require("config.block")
+        end
+    }
 
     -- Orgmode ---------------------------------------------------------------
     use {'nvim-orgmode/orgmode', config = function()
@@ -183,6 +191,7 @@ require('packer').startup(function(use)
         as='catppuccin',
         run = 'CatpuccinCompile',
     }
+    use { 'Everblush/nvim', as = 'everblush' }
 
 
     -- Automatically set up your configuration after cloning packer.nvim

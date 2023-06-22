@@ -11,7 +11,7 @@ vim.opt.termguicolors = true
 
 require('config.catppuccin_config')
 -- vim.g.catppuccin_flavour = "frappe" -- latte, frappe, macchiato, mocha
-vim.cmd('colorscheme catppuccin-mocha')
+vim.cmd('colorscheme catppuccin-frappe')
 
 vim.opt.guicursor:append('n-v-c:blinkon0')
 
