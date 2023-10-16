@@ -93,7 +93,7 @@ vim.api.nvim_create_autocmd("CursorHold", {
 })
 
 vim.diagnostic.config({
-    virtual_text = true,
+    virtual_text = false,
     -- virtual_lines = true,
     signs = true,
     underline = true,

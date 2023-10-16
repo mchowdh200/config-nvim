@@ -191,6 +191,13 @@ require('packer').startup(function(use)
         as='catppuccin',
         run = 'CatpuccinCompile',
     }
+    use {
+        'ramojus/mellifluous.nvim',
+        config = function()
+            require('config.mellifluous')
+        end
+    }
+
     use { 'Everblush/nvim', as = 'everblush' }
 
 

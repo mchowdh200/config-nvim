@@ -1,6 +1,6 @@
 local M = require("block")
 M.setup({
-    automatic=true,
+    automatic=false,
 })
 -- vim.api.nvim_create_autocmd('FileType', {
 --     group = 'block.nvim',

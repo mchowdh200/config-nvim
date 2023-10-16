@@ -22,7 +22,7 @@ null_ls.setup({
                     "BinPackArguments: false,"..
                     "BinPackParameters: false,"..
                     "AllowAllParametersOfDeclarationOnNextLine: false,"..
-                    "ColumnLimit: 80}"
+                    "ColumnLimit: 88}"
                 }
 
             -- command = "clang-format --style='{BasedOnStyle: LLVM, IndentWidth: 4}'",
