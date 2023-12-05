@@ -178,27 +178,19 @@ require('packer').startup(function(use)
     use 'tmux-plugins/vim-tmux-focus-events'
 
     -- Themes -----------------------------------------------------------------
-    use 'savq/melange'
     use 'lifepillar/vim-solarized8'
     use 'liuchengxu/space-vim-theme'
-    use 'rakr/vim-one'
-    use 'NLKNguyen/papercolor-theme'
     use 'chriskempson/vim-tomorrow-theme'
     use 'ErichDonGubler/vim-sublime-monokai'
-    use 'jnurmine/Zenburn'
     use {
         'catppuccin/nvim',
         as='catppuccin',
         run = 'CatpuccinCompile',
     }
     use {
-        'ramojus/mellifluous.nvim',
-        config = function()
-            require('config.mellifluous')
-        end
+        'folke/tokyonight.nvim',
+        config = function () require('config.tokyonight') end
     }
-
-    use { 'Everblush/nvim', as = 'everblush' }
 
 
     -- Automatically set up your configuration after cloning packer.nvim
