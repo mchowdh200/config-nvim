@@ -2,6 +2,10 @@
 -------------------------------------------------------------------------------
 -- Install/configure plugins
 -------------------------------------------------------------------------------
+if vim.g.vscode then
+    return
+end
+
 local fn = vim.fn
 local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
 if fn.empty(fn.glob(install_path)) > 0 then
@@ -96,7 +100,10 @@ require('packer').startup(function(use)
     --    'onsails/lspkind.nvim',
     --     config = [[require('config.lspkind')]],
     -- }
-    use 'github/copilot.vim'
+    use {
+        'github/copilot.vim',
+        config = [[require('config.copilot')]],
+    }
 
     -- Treesitter -------------------------------------------------------------
     use {
@@ -104,6 +111,9 @@ require('packer').startup(function(use)
         run = function() require('nvim-treesitter.install').update({ with_sync = true }) end,
         config = [[require('config.treesitter')]],
     }
+
+    use 'nvim-treesitter/nvim-treesitter-context'
+
     -- at the moment python indentation breaks with treesitter
     -- so fallback to this for now and check back periodically
     use {

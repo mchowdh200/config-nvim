@@ -6,13 +6,16 @@ require 'config.mappings'
 -------------------------------------------------------------------------------
 -- Appearance
 -------------------------------------------------------------------------------
-vim.opt.background = 'dark'
-vim.opt.termguicolors = true
+if not vim.g.vscode then
+    vim.opt.background = 'dark'
+    vim.opt.termguicolors = true
 
-require('config.catppuccin_config')
-vim.cmd('colorscheme catppuccin-frappe')
+    require('config.catppuccin_config')
+    -- vim.cmd('colorscheme catppuccin-frappe')
+    vim.cmd('colorscheme tokyonight')
 
-vim.opt.guicursor:append('n-v-c:blinkon0')
+    vim.opt.guicursor:append('n-v-c:blinkon0')
+end
 
 -------------------------------------------------------------------------------
 -- Editor stuff
@@ -51,30 +54,34 @@ vim.opt.splitright = true
 -------------------------------------------------------------------------------
 -- Focus mode
 -------------------------------------------------------------------------------
-vim.cmd [[
-    autocmd! User GoyoEnter Limelight
-    autocmd! User GoyoLeave Limelight!
-    let g:goyo_width=100
-    let g:goyo_height=95
+if not vim.g.vscode then
+    vim.cmd [[
+        autocmd! User GoyoEnter Limelight
+        autocmd! User GoyoLeave Limelight!
+        let g:goyo_width=100
+        let g:goyo_height=95
 
-    let g:limelight_default_coefficient = 0.7
-    let g:limelight_paragraph_span = 0
-]]
+        let g:limelight_default_coefficient = 0.7
+        let g:limelight_paragraph_span = 0
+    ]]
+end
 
 -------------------------------------------------------------------------------
 -- Git settings
 -------------------------------------------------------------------------------
-vim.cmd [[
-    command Gstatus Git
-    command Gcommit Git commit
-    command Gpush Git push
-    command Gpull Git pull
-    command Gdiff Git diff
-    autocmd FileType fugitive nmap <buffer> q gq
-    autocmd FileType fugitive nmap <buffer> c :Gcommit<CR>
-    autocmd FileType fugitiveblame nmap <buffer> q gq
-    autocmd FileType git nmap <buffer> q :q<CR>
-]]
+if not vim.g.vscode then
+    vim.cmd [[
+        command Gstatus Git
+        command Gcommit Git commit
+        command Gpush Git push
+        command Gpull Git pull
+        command Gdiff Git diff
+        autocmd FileType fugitive nmap <buffer> q gq
+        autocmd FileType fugitive nmap <buffer> c :Gcommit<CR>
+        autocmd FileType fugitiveblame nmap <buffer> q gq
+        autocmd FileType git nmap <buffer> q :q<CR>
+    ]]
+end
 
 -------------------------------------------------------------------------------
 -- Some language specific settings
