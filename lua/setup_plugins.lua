@@ -138,7 +138,7 @@ require('packer').startup(function(use)
         {
             'nvim-telescope/telescope-frecency.nvim',
             after = 'telescope.nvim',
-            requires = 'kkharji/sqlite.lua',
+            -- requires = 'kkharji/sqlite.lua',
         },
         {
             'nvim-telescope/telescope-fzf-native.nvim',
