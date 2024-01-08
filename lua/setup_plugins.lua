@@ -162,8 +162,12 @@ require('packer').startup(function(use)
     use { 'nvim-lualine/lualine.nvim',
         config = [[require('config.lualine')]],
     }
-    use 'junegunn/goyo.vim'
     use 'junegunn/limelight.vim'
+    use {'folke/zen-mode.nvim',
+        config = function()
+            require("config.zen-mode")
+        end
+    }
     use 'kyazdani42/nvim-web-devicons'
     use { 'lukas-reineke/indent-blankline.nvim',
         config=function()
