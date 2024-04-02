@@ -112,7 +112,10 @@ require('packer').startup(function(use)
         config = [[require('config.treesitter')]],
     }
 
-    use 'nvim-treesitter/nvim-treesitter-context'
+    use {
+        'nvim-treesitter/nvim-treesitter-context',
+        config = [[require('config.treesitter_context')]],
+    }
 
     -- at the moment python indentation breaks with treesitter
     -- so fallback to this for now and check back periodically
@@ -192,10 +195,17 @@ require('packer').startup(function(use)
     use 'tmux-plugins/vim-tmux-focus-events'
 
     -- Themes -----------------------------------------------------------------
+    use {
+        'Verf/deepwhite.nvim',
+        config = function ()
+                require('deepwhite').setup({low_blue_light = false})
+            end
+    }
     use 'lifepillar/vim-solarized8'
     use 'liuchengxu/space-vim-theme'
     use 'chriskempson/vim-tomorrow-theme'
     use 'ErichDonGubler/vim-sublime-monokai'
+    use 'yashguptaz/calvera-dark.nvim'
     use {
         'catppuccin/nvim',
         as='catppuccin',
