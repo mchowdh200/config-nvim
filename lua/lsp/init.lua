@@ -62,7 +62,7 @@ lspconfig.clangd.setup{
         debounce_text_changes = 150,
     },
 }
-lspconfig.pyright.setup {
+lspconfig.basedpyright.setup {
     capabilities = capabilities,
     on_attach = on_attach,
 }

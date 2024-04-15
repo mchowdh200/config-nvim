@@ -57,20 +57,20 @@ require('packer').startup(function(use)
         },
 
         -- dap -----------------------------------
-        {
-            'mfussenegger/nvim-dap',
-            requires = { 'theHamsta/nvim-dap-virtual-text', },
-            config = [[require('config.nvim_dap')]]
-        },
-        {
-            'theHamsta/nvim-dap-virtual-text',
-            config=[[require('config.dap_virtual_text')]],
-        },
-        {
-            'rcarriga/nvim-dap-ui',
-            requires = 'mfussenegger/nvim-dap',
-            config=[[require('config.dap_ui')]],
-        },
+        -- {
+        --     'mfussenegger/nvim-dap',
+        --     requires = { 'theHamsta/nvim-dap-virtual-text', },
+        --     config = [[require('config.nvim_dap')]]
+        -- },
+        -- {
+        --     'theHamsta/nvim-dap-virtual-text',
+        --     config=[[require('config.dap_virtual_text')]],
+        -- },
+        -- {
+        --     'rcarriga/nvim-dap-ui',
+        --     requires = 'mfussenegger/nvim-dap',
+        --     config=[[require('config.dap_ui')]],
+        -- },
 
         -- cmp -----------------------------------
 
@@ -185,11 +185,11 @@ require('packer').startup(function(use)
     }
 
     -- Orgmode ---------------------------------------------------------------
-    use {'nvim-orgmode/orgmode', config = function()
-        local o = require('orgmode')
-        o.setup{}
-        o.setup_ts_grammar()
-    end }
+    -- use {'nvim-orgmode/orgmode', config = function()
+    --     local o = require('orgmode')
+    --     o.setup{}
+    --     o.setup_ts_grammar()
+    -- end }
 
     -- Tmux -------------------------------------------------------------------
     use 'tmux-plugins/vim-tmux-focus-events'
