@@ -11,7 +11,7 @@ if not vim.g.vscode then
     vim.opt.termguicolors = true
 
     require('config.catppuccin_config')
-    vim.cmd('colorscheme catppuccin_frappe')
+    vim.cmd('colorscheme catppuccin-frappe')
 
     vim.opt.guicursor:append('n-v-c:blinkon0')
     vim.api.nvim_set_hl(0, "@comment.bold", { bold = true })
