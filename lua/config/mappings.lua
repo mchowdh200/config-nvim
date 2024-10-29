@@ -14,6 +14,10 @@ local vmap = function(shortcut, command)
     map('v', shortcut, command)
 end
 
+local tmap = function(shortcut, command)
+    map('t', shortcut, command)
+end
+
 
 vim.api.nvim_create_user_command("ToggleBackground", function()
     vim.cmd('set background=' .. (vim.o.background == 'dark' and 'light' or 'dark'))
@@ -25,6 +29,7 @@ nmap('<space>', ':')
 -- nmap('<down>', '<c-n>')
 if not vim.g.vscode then
     imap('jk', '<Esc>')
+    tmap('jk', '<C-\\><C-n>')
     nmap('\\', ':pclose<CR>') -- close popup
 
     -- leader maps
