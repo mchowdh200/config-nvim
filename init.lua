@@ -7,11 +7,35 @@ require 'config.mappings'
 -- Appearance
 -------------------------------------------------------------------------------
 if not vim.g.vscode then
+    -- GUI specific settings
+    if vim.g.neovide then
+        vim.o.guifont = "MonaspaceArgon Nerd Font:h13:extralight"
+
+        -- zooming in and out
+        vim.g.neovide_scale_factor = 1.0
+        local change_scale_factor = function(delta)
+            vim.g.neovide_scale_factor = vim.g.neovide_scale_factor * delta
+            vim.cmd('redraw!')
+        end
+        vim.keymap.set("n", "<C-=>", function()
+            change_scale_factor(1.25)
+        end)
+        vim.keymap.set("n", "<C-->", function()
+            change_scale_factor(1/1.25)
+        end)
+
+        -- no animations
+        vim.g.neovide_position_animation_length = 0
+        vim.g.neovide_cursor_animation_length = 0
+        vim.g.neovide_scroll_animation_length = 0
+
+
+    end
     vim.opt.background = 'dark'
     vim.opt.termguicolors = true
 
     require('config.catppuccin_config')
-    vim.cmd('colorscheme catppuccin-frappe')
+    vim.cmd('colorscheme catppuccin-mocha')
 
     vim.opt.guicursor:append('n-v-c:blinkon0')
     vim.api.nvim_set_hl(0, "@comment.bold", { bold = true })
@@ -48,6 +72,19 @@ vim.opt.incsearch = true
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
 vim.opt.clipboard = 'unnamedplus' -- linux: install xclip to work
+-- vim.g.clipboard = {
+--     name = 'OSC 52',
+--     copy = {
+--         ['+'] = require('vim.ui.clipboard.osc52').copy,
+--         ['*'] = require('vim.ui.clipboard.osc52').copy,
+--         -- ['unamedplus'] = require('vim.ui.clipboard.osc52').copy,
+--     },
+--     paste = {
+--         ['+'] = require('vim.ui.clipboard.osc52').paste,
+--         ['*'] = require('vim.ui.clipboard.osc52').paste,
+--         -- ['unamedplus'] = require('vim.ui.clipboard.osc52').paste,
+--     },
+-- }
 vim.opt.autoread = true
 vim.opt.splitbelow = true
 vim.opt.splitright = true
