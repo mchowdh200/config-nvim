@@ -85,7 +85,7 @@ require('packer').startup(function(use)
                 'hrsh7th/cmp-path',
                 'hrsh7th/cmp-cmdline',
             },
-            after = 'lspkind.nvim',
+            -- after = 'lspkind.nvim',
             config = [[require('completions')]],
 
         },
@@ -96,10 +96,6 @@ require('packer').startup(function(use)
         { 'hrsh7th/cmp-cmdline' },
     }
 
-    -- use {
-    --    'onsails/lspkind.nvim',
-    --     config = [[require('config.lspkind')]],
-    -- }
     use {
         'github/copilot.vim',
         config = [[require('config.copilot')]],
