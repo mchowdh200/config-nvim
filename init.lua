@@ -34,8 +34,9 @@ if not vim.g.vscode then
     vim.opt.background = 'dark'
     vim.opt.termguicolors = true
 
-    require('config.catppuccin_config')
-    vim.cmd('colorscheme catppuccin-mocha')
+    vim.cmd('colorscheme rose-pine')
+    -- require('config.catppuccin_config')
+    -- vim.cmd('colorscheme catppuccin-mocha')
 
     vim.opt.guicursor:append('n-v-c:blinkon0')
     vim.api.nvim_set_hl(0, "@comment.bold", { bold = true })

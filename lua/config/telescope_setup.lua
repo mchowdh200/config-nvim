@@ -1,4 +1,5 @@
 local nmap = require('config.utils').nmap
+local telescope = require('telescope')
 
 nmap('<leader>b', ':Telescope buffers show_all_buffers=true theme=get_dropdown<CR>')
 nmap('<leader>gf', ':Telescope git_files theme=get_dropdown<CR>')

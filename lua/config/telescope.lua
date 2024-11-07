@@ -6,8 +6,9 @@ telescope.setup {
   },
   extensions = {
     frecency = {
+        db_safe_mode = false,
         workspaces = {
-        ['Repositories'] = '~/Repositories',
+            ['Repositories'] = '~/Repositories',
         }
     },
     fzf = {
