@@ -62,29 +62,41 @@ require('lazy').setup({
             config = function () require('config.null_ls_setup') end
         },
 
-        {
-            'ldelossa/litee.nvim',
-            event = "VeryLazy",
-            opts = {
-                notify = { enabled = false },
-                panel = {
-                    orientation = "bottom",
-                    panel_size = 10,
-                },
-            },
-            config = function(_, opts) require('litee.lib').setup(opts) end
-        },
+        -- {
+        --     'ldelossa/litee.nvim',
+        --     event = "VeryLazy",
+        --     opts = {
+        --         notify = { enabled = false },
+        --         panel = {
+        --             orientation = "right",
+        --             panel_size = 30,
+        --         },
+        --     },
+        --     config = function(_, opts) require('litee.lib').setup(opts) end
+        -- },
 
-        {
-            'ldelossa/litee-calltree.nvim',
-            dependencies = 'ldelossa/litee.nvim',
-            event = "VeryLazy",
-            opts = {
-                on_open = "panel",
-                map_resize_keys = false,
-            },
-            config = function(_, opts) require('litee.calltree').setup(opts) end
-        },
+        -- {
+        --     'ldelossa/litee-symboltree.nvim',
+        --     dependencies = 'ldelossa/litee.nvim',
+        --     event = "VeryLazy",
+        --     opts = {
+        --         on_open = "panel",
+        --         map_resize_keys = false,
+        --     },
+        --     config = function(_, opts) require('litee.symboltree').setup(opts) end
+        -- },
+
+
+        -- {
+        --     'ldelossa/litee-calltree.nvim',
+        --     dependencies = 'ldelossa/litee.nvim',
+        --     event = "VeryLazy",
+        --     opts = {
+        --         on_open = "panel",
+        --         map_resize_keys = false,
+        --     },
+        --     config = function(_, opts) require('litee.calltree').setup(opts) end
+        -- },
 
         -- cmp ----------------------------------------------------------------
         {
@@ -96,6 +108,12 @@ require('lazy').setup({
         { 'hrsh7th/cmp-buffer' },
         { 'hrsh7th/cmp-path' },
         { 'hrsh7th/cmp-cmdline' },
+
+        {
+            "L3MON4D3/LuaSnip",
+            -- follow latest release.
+            version = "v2.*", -- Replace <CurrentMajor> by the latest released major (first number of latest release)
+        },
 
         {
             'github/copilot.vim',
@@ -143,6 +161,24 @@ require('lazy').setup({
             },
 
         -- Misc Editor ui stuff ----------------------------------------------
+        {
+            "folke/noice.nvim",
+            event = "VeryLazy",
+            opts = {
+                -- add any options here
+            },
+            dependencies = {
+                -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
+                "MunifTanjim/nui.nvim",
+                -- OPTIONAL:
+                --   `nvim-notify` is only needed, if you want to use the notification view.
+                --   If not available, we use `mini` as the fallback
+                "rcarriga/nvim-notify",
+            }
+        },
+        { 'MunifTanjim/nui.nvim' },
+        { "rcarriga/nvim-notify" },
+
         { 'nvim-lualine/lualine.nvim',
             config = function() require('config.lualine') end,
         },
@@ -168,11 +204,10 @@ require('lazy').setup({
         { 'chriskempson/vim-tomorrow-theme' },
         { 'ErichDonGubler/vim-sublime-monokai' },
         { 'yashguptaz/calvera-dark.nvim' },
-        -- {
-        --     'catppuccin/nvim',
-        --     name='catppuccin',
-        --     -- build = vim.cmd[[CatpuccinCompile]]
-        -- },
+        {
+            'catppuccin/nvim',
+            name='catppuccin',
+        },
         {
             'folke/tokyonight.nvim',
             config = function () require('config.tokyonight') end
