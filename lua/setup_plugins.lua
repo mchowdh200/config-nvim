@@ -212,5 +212,10 @@ require('lazy').setup({
             'folke/tokyonight.nvim',
             config = function () require('config.tokyonight') end
         },
+
+        -- Language specific stuff
+        { 'ziglang/zig.vim' }
+
+
     },
 })
