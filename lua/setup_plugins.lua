@@ -53,50 +53,19 @@ require('lazy').setup({
             config = function() require('config.mason') end
         },
 
+        -- {
+        --     'jose-elias-alvarez/null-ls.nvim',
+        --     -- after = {
+        --     --     'mason.nvim',
+        --     --     'nvim-lspconfig',
+        --     -- },
+        --     config = function () require('config.null_ls_setup') end
+        -- },
         {
-            'jose-elias-alvarez/null-ls.nvim',
-            -- after = {
-            --     'mason.nvim',
-            --     'nvim-lspconfig',
-            -- },
-            config = function () require('config.null_ls_setup') end
+            "stevearc/conform.nvim",
+            event = { "BufReadPre", "BufNewFile" },
+            config = function() require("config.conform") end
         },
-
-        -- {
-        --     'ldelossa/litee.nvim',
-        --     event = "VeryLazy",
-        --     opts = {
-        --         notify = { enabled = false },
-        --         panel = {
-        --             orientation = "right",
-        --             panel_size = 30,
-        --         },
-        --     },
-        --     config = function(_, opts) require('litee.lib').setup(opts) end
-        -- },
-
-        -- {
-        --     'ldelossa/litee-symboltree.nvim',
-        --     dependencies = 'ldelossa/litee.nvim',
-        --     event = "VeryLazy",
-        --     opts = {
-        --         on_open = "panel",
-        --         map_resize_keys = false,
-        --     },
-        --     config = function(_, opts) require('litee.symboltree').setup(opts) end
-        -- },
-
-
-        -- {
-        --     'ldelossa/litee-calltree.nvim',
-        --     dependencies = 'ldelossa/litee.nvim',
-        --     event = "VeryLazy",
-        --     opts = {
-        --         on_open = "panel",
-        --         map_resize_keys = false,
-        --     },
-        --     config = function(_, opts) require('litee.calltree').setup(opts) end
-        -- },
 
         -- cmp ----------------------------------------------------------------
         {
@@ -214,8 +183,11 @@ require('lazy').setup({
         },
 
         -- Language specific stuff
-        { 'ziglang/zig.vim' }
-
-
+        {
+            'ziglang/zig.vim',
+            config = function()
+                vim.g.zig_fmt_autosave = 0
+            end
+        },
     },
 })
