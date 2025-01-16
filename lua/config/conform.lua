@@ -17,7 +17,7 @@ conform.setup({
 		lua = { "stylua" },
 		cpp = { "clang-format" },
 		c = { "clang-format" },
-		zig = { "zig fmt" },
+		zig = { "zigfmt" },
 	},
 })
 
