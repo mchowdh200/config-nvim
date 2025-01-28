@@ -18,7 +18,13 @@ conform.setup({
 		cpp = { "clang-format" },
 		c = { "clang-format" },
 		zig = { "zigfmt" },
+		snakemake = { "snakefmt" },
 	},
 })
 
-vim.api.nvim_set_keymap("n", "<leader>f", ":lua require('conform').format()<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap(
+	"n",
+	"<leader>f",
+	":lua require('conform').format({ async=true })<CR>",
+	{noremap = true, silent = true }
+)

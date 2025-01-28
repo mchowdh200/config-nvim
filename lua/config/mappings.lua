@@ -19,9 +19,9 @@ local tmap = function(shortcut, command)
 end
 
 
-vim.api.nvim_create_user_command("ToggleBackground", function()
-    vim.cmd('set background=' .. (vim.o.background == 'dark' and 'light' or 'dark'))
-end, {range = false, nargs = 0})
+-- vim.api.nvim_create_user_command("ToggleBackground", function()
+--     vim.cmd('set background=' .. (vim.o.background == 'dark' and 'light' or 'dark'))
+-- end, {range = false, nargs = 0})
 
 -- basic remaps
 nmap('<space>', ':')

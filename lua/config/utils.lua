@@ -17,4 +17,12 @@ end
 utils.vmap = function(shortcut, command)
   utils.map('v', shortcut, command)
 end
+
+
+
+
+
+
+
+
 return utils
