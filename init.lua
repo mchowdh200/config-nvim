@@ -71,12 +71,12 @@ if os.getenv("SSH_TTY") then
 		copy = {
 			["+"] = require("vim.ui.clipboard.osc52").copy,
 			["*"] = require("vim.ui.clipboard.osc52").copy,
-			-- ['unamedplus'] = require('vim.ui.clipboard.osc52').copy,
+			['unamedplus'] = require('vim.ui.clipboard.osc52').copy,
 		},
 		paste = {
 			["+"] = require("vim.ui.clipboard.osc52").paste,
 			["*"] = require("vim.ui.clipboard.osc52").paste,
-			-- ['unamedplus'] = require('vim.ui.clipboard.osc52').paste,
+			['unamedplus'] = require('vim.ui.clipboard.osc52').paste,
 		},
 	}
 else
