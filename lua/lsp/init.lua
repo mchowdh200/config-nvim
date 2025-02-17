@@ -83,4 +83,14 @@ lspconfig.lua_ls.setup({
 lspconfig.zls.setup({
 	capabilities = capabilities,
 	on_attach = on_attach,
+	settings = {
+		zls = {
+			-- checkOnSave = { enable = true },
+			enable_build_on_save = true,
+		},
+	},
+})
+lspconfig.nginx_language_server.setup({
+	capabilities = capabilities,
+	on_attach = on_attach,
 })

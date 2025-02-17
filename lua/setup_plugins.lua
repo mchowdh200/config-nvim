@@ -58,6 +58,32 @@ require("lazy").setup({
 			end,
 		},
 
+		{
+			"WhoIsSethDaniel/mason-tool-installer.nvim",
+			dependencies = {
+				"williamboman/mason.nvim",
+			},
+			config = function()
+				require("mason-tool-installer").setup({
+					ensure_installed = {
+						"bash-language-server",
+						"black",
+						"clang-format",
+						"clangd",
+						"isort",
+						"lua-language-server",
+						-- {"nginx-language-server", version = "0.7.1"},
+						"nginx-language-server",
+						"prettier",
+						"pyright",
+						"snakefmt",
+						"stylua",
+						"zls",
+					},
+				})
+			end,
+		},
+
 		-- {
 		--     'jose-elias-alvarez/null-ls.nvim',
 		--     -- after = {

@@ -64,24 +64,20 @@ vim.opt.hlsearch = true
 vim.opt.incsearch = true
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
--- check if $SSH_TTY is set
-if os.getenv("SSH_TTY") then
-	vim.g.clipboard = {
-		name = "OSC 52",
-		copy = {
-			["+"] = require("vim.ui.clipboard.osc52").copy,
-			["*"] = require("vim.ui.clipboard.osc52").copy,
-			['unamedplus'] = require('vim.ui.clipboard.osc52').copy,
-		},
-		paste = {
-			["+"] = require("vim.ui.clipboard.osc52").paste,
-			["*"] = require("vim.ui.clipboard.osc52").paste,
-			['unamedplus'] = require('vim.ui.clipboard.osc52').paste,
-		},
-	}
-else
-	vim.opt.clipboard = "unnamedplus" -- linux: install xclip to work
-end
+
+-- vim.g.clipboard = {
+-- 	name = "OSC 52",
+-- 	copy = {
+-- 		["+"] = require("vim.ui.clipboard.osc52").copy("+"),
+-- 		["*"] = require("vim.ui.clipboard.osc52").copy("*"),
+-- 	},
+-- 	paste = {
+-- 		["+"] = require("vim.ui.clipboard.osc52").paste("+"),
+-- 		["*"] = require("vim.ui.clipboard.osc52").paste("*"),
+-- 	},
+-- }
+vim.opt.clipboard = "unnamedplus" -- linux: install xclip to work
+
 vim.opt.autoread = true
 vim.opt.splitbelow = true
 vim.opt.splitright = true
