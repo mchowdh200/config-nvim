@@ -1,6 +1,7 @@
 local conform = require("conform")
 
 conform.setup({
+	-- lsp_format = "never",
 	formatters_by_ft = {
 		python = { "black", "isort" },
 		javascript = { "prettier" },
@@ -15,16 +16,25 @@ conform.setup({
 		markdown = { "prettier" },
 		graphql = { "prettier" },
 		lua = { "stylua" },
-		cpp = { "clang-format" },
-		c = { "clang-format" },
+		cpp = { "clang_format" },
+		c = { "clang_format" },
 		zig = { "zigfmt" },
 		snakemake = { "snakefmt" },
 	},
 })
 
+conform.formatters.clang_format = {
+	command = "clang-format",
+	append_args = function()
+		return {
+			"--style=file:" .. vim.fn.expand("~/.config/nvim/lua/config/clang_format.yaml"),
+		}
+	end,
+}
+
 vim.api.nvim_set_keymap(
 	"n",
 	"<leader>f",
 	":lua require('conform').format({ async=true })<CR>",
-	{noremap = true, silent = true }
+	{ noremap = true, silent = true }
 )
