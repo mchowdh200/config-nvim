@@ -20,6 +20,7 @@ conform.setup({
 		c = { "clang_format" },
 		zig = { "zigfmt" },
 		snakemake = { "snakefmt" },
+		rust = { "rustfmt" },
 	},
 })
 

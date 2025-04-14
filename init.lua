@@ -4,36 +4,24 @@ require("config.mappings")
 -------------------------------------------------------------------------------
 -- Appearance
 -------------------------------------------------------------------------------
-local dark_theme = "tokyonight-storm"
+local dark_theme = "tokyonight-night"
 local light_theme = "tokyonight-day"
+-- local dark_theme = "Solarized"
+-- local light_theme = "Solarized"
 vim.api.nvim_create_user_command("ToggleColorscheme", function()
 	vim.cmd("set background=" .. (vim.o.background == "dark" and "light" or "dark"))
 	vim.cmd("colorscheme " .. (vim.o.background == "light" and light_theme or dark_theme))
 end, { range = false, nargs = 0 })
 vim.api.nvim_set_keymap("n", "<leader>d", ":ToggleColorscheme<CR>", { noremap = true, silent = true })
 
--- vim.opt.termguicolors = true
 require("config.catppuccin_config")
--- vim.opt.background = "dark"
--- vim.cmd("colorscheme catppuccin-mocha")
 if vim.opt.background == "light" then
 	vim.cmd("colorscheme " .. light_theme)
 else
 	vim.cmd("colorscheme " .. dark_theme)
 end
 
--- if vim.uv.os_uname().sysname == "Darwin" then
--- 	if vim.fn.executable("defaults") then
--- 		local appleInterfaceStyle = vim.fn.system({ "defaults", "read", "-g", "AppleInterfaceStyle" })
--- 		if appleInterfaceStyle:find("Light") then
--- 			vim.opt.background = "light"
--- 			vim.cmd("colorscheme tokyonight-day")
--- 		end
--- 	end
--- end
-
 vim.opt.guicursor:append("n-v-c:blinkon0")
-vim.api.nvim_set_hl(0, "@comment.bold", { bold = true })
 
 -------------------------------------------------------------------------------
 -- Editor stuff
@@ -49,6 +37,14 @@ vim.opt.expandtab = true
 vim.opt.autoindent = true
 vim.opt.fileformat = "unix"
 vim.wo.wrap = false
+-- Enable word wrap for Markdown files
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "markdown",
+  callback = function()
+    vim.opt_local.wrap = true
+    vim.opt_local.linebreak = true
+  end,
+})
 vim.opt.autochdir = true
 vim.opt.swapfile = false
 
@@ -64,6 +60,7 @@ vim.opt.hlsearch = true
 vim.opt.incsearch = true
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
+vim.opt.conceallevel = 2
 
 -- vim.g.clipboard = {
 -- 	name = "OSC 52",

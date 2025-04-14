@@ -58,45 +58,28 @@ require("lazy").setup({
 			end,
 		},
 
-		-- {
-		-- 	"WhoIsSethDaniel/mason-tool-installer.nvim",
-		-- 	dependencies = {
-		-- 		"williamboman/mason.nvim",
-		-- 	},
-		-- 	config = function()
-		-- 		require("mason-tool-installer").setup({
-		-- 			ensure_installed = {
-		-- 				"bash-language-server",
-		-- 				"black",
-		-- 				"clang-format",
-		-- 				"clangd",
-		-- 				"isort",
-		-- 				"lua-language-server",
-		-- 				-- {"nginx-language-server", version = "0.7.1"},
-		-- 				"nginx-language-server",
-		-- 				"prettier",
-		-- 				"pyright",
-		-- 				"snakefmt",
-		-- 				"stylua",
-		-- 				"zls",
-		-- 			},
-		-- 		})
-		-- 	end,
-		-- },
-
-		-- {
-		--     'jose-elias-alvarez/null-ls.nvim',
-		--     -- after = {
-		--     --     'mason.nvim',
-		--     --     'nvim-lspconfig',
-		--     -- },
-		--     config = function () require('config.null_ls_setup') end
-		-- },
 		{
 			"stevearc/conform.nvim",
 			event = { "BufReadPre", "BufNewFile" },
 			config = function()
 				require("config.conform")
+			end,
+		},
+		{
+			"rachartier/tiny-inline-diagnostic.nvim",
+			event = "VeryLazy", -- Or `LspAttach`
+			priority = 1000, -- needs to be loaded in first
+			config = function()
+				require("tiny-inline-diagnostic").setup({
+					signs = {
+						left = "",
+						right = "",
+					},
+					blend = {
+						factor = 0.22,
+					},
+				})
+				vim.diagnostic.config({ virtual_text = false }) -- Only if needed in your configuration, if you already have native LSP diagnostics
 			end,
 		},
 
@@ -119,20 +102,30 @@ require("lazy").setup({
 			version = "v2.*", -- Replace <CurrentMajor> by the latest released major (first number of latest release)
 		},
 
-		-- {
-		-- 	"github/copilot.vim",
-		-- 	config = function()
-		-- 		require("config.copilot")
-		-- 	end,
-		-- },
 		{
-			"ggml-org/llama.vim",
-			init = function()
-				vim.g.llama_config = {
-					show_info = 0,
-				}
+			"github/copilot.vim",
+			config = function()
+				require("config.copilot")
 			end,
 		},
+		{
+			"olimorris/codecompanion.nvim",
+			config = function()
+				require("config.codecompanion")
+			end,
+			dependencies = {
+				"nvim-lua/plenary.nvim",
+				"nvim-treesitter/nvim-treesitter",
+			},
+		},
+		-- {
+		-- 	"ggml-org/llama.vim",
+		-- 	init = function()
+		-- 		vim.g.llama_config = {
+		-- 			show_info = 0,
+		-- 		}
+		-- 	end,
+		-- },
 
 		-- Treesitter ---------------------------------------------------------
 		{
@@ -189,23 +182,16 @@ require("lazy").setup({
 		},
 
 		-- Misc Editor ui stuff ----------------------------------------------
-		-- {
-		--     "folke/noice.nvim",
-		--     event = "VeryLazy",
-		--     opts = {
-		--         -- add any options here
-		--     },
-		--     dependencies = {
-		--         -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
-		--         "MunifTanjim/nui.nvim",
-		--         -- OPTIONAL:
-		--         --   `nvim-notify` is only needed, if you want to use the notification view.
-		--         --   If not available, we use `mini` as the fallback
-		--         "rcarriga/nvim-notify",
-		--     }
-		-- },
-		-- { 'MunifTanjim/nui.nvim' },
-		-- { "rcarriga/nvim-notify" },
+		{
+			"epwalsh/obsidian.nvim",
+			version = "*",
+			lazy = true,
+			ft = "markdown",
+			dependencies = { "nvim-lua/plenary.nvim" },
+            config = function()
+                require("config.obsidian")
+            end,
+		},
 
 		{
 			"nvim-lualine/lualine.nvim",
@@ -232,6 +218,12 @@ require("lazy").setup({
 		{ "tmux-plugins/vim-tmux-focus-events" },
 
 		-- Themes -------------------------------------------------------------
+		{
+			"maxmx03/solarized.nvim",
+			config = function()
+				require("config.solarized")
+			end,
+		},
 		{ "rose-pine/neovim", name = "rose-pine" },
 		{
 			"Verf/deepwhite.nvim",
@@ -239,11 +231,11 @@ require("lazy").setup({
 				require("deepwhite").setup({ low_blue_light = false })
 			end,
 		},
-		{ "lifepillar/vim-solarized8" },
-		{ "liuchengxu/space-vim-theme" },
-		{ "chriskempson/vim-tomorrow-theme" },
-		{ "ErichDonGubler/vim-sublime-monokai" },
-		{ "yashguptaz/calvera-dark.nvim" },
+		-- { "lifepillar/vim-solarized8" },
+		-- { "liuchengxu/space-vim-theme" },
+		-- { "chriskempson/vim-tomorrow-theme" },
+		-- { "ErichDonGubler/vim-sublime-monokai" },
+		-- { "yashguptaz/calvera-dark.nvim" },
 		{
 			"catppuccin/nvim",
 			name = "catppuccin",

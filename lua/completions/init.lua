@@ -73,24 +73,24 @@ cmp.setup.cmdline('/', {
 
 -- Customize diagnostics -----------------------------------------------------
 -- open float window when cursor is hovering above point
-vim.api.nvim_create_autocmd("CursorHold", {
-    buffer = bufnr,
-    callback = function()
-        local opts = {
-            focusable = false,
-            close_events = {
-                "BufLeave", "CursorMoved",
-                "InsertEnter", "FocusLost"
-            },
-            border = 'single',
-            source = 'always',
-            prefix = ' ',
-            header = ' ',
-            scope = 'cursor',
-        }
-        vim.diagnostic.open_float(nil, opts)
-    end
-})
+-- vim.api.nvim_create_autocmd("CursorHold", {
+--     buffer = bufnr,
+--     callback = function()
+--         local opts = {
+--             focusable = false,
+--             close_events = {
+--                 "BufLeave", "CursorMoved",
+--                 "InsertEnter", "FocusLost"
+--             },
+--             border = 'single',
+--             source = 'always',
+--             prefix = ' ',
+--             header = ' ',
+--             scope = 'cursor',
+--         }
+--         vim.diagnostic.open_float(nil, opts)
+--     end
+-- })
 
 vim.diagnostic.config({
     virtual_text = false,
