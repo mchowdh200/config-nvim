@@ -4,10 +4,10 @@ require("config.mappings")
 -------------------------------------------------------------------------------
 -- Appearance
 -------------------------------------------------------------------------------
-local dark_theme = "tokyonight-night"
+local dark_theme = "tokyonight-storm"
 local light_theme = "tokyonight-day"
--- local dark_theme = "Solarized"
--- local light_theme = "Solarized"
+-- local dark_theme = "catppuccin-mocha"
+-- local light_theme = "catppuccin-latte"
 vim.api.nvim_create_user_command("ToggleColorscheme", function()
 	vim.cmd("set background=" .. (vim.o.background == "dark" and "light" or "dark"))
 	vim.cmd("colorscheme " .. (vim.o.background == "light" and light_theme or dark_theme))

@@ -58,6 +58,10 @@ local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protoc
 ------------------------------------------------------------------------------
 -- Setup servers
 ------------------------------------------------------------------------------
+lspconfig.bashls.setup({
+	capabilities = capabilities,
+	on_attach = on_attach,
+})
 lspconfig.clangd.setup({
 	on_attach = on_attach,
 	capabilities = capabilities,
@@ -65,13 +69,22 @@ lspconfig.clangd.setup({
 		debounce_text_changes = 150,
 	},
 })
-lspconfig.pyright.setup({
-	capabilities = capabilities,
-	on_attach = on_attach,
-})
-lspconfig.bashls.setup({
-	capabilities = capabilities,
-	on_attach = on_attach,
+lspconfig.gopls.setup({
+    capabilities = capabilities,
+    on_attach = on_attach,
+    -- settings = {
+        -- gopls = {
+            -- analyses = {
+            --     unusedparams = true,
+            --     deprecated = true,
+            --     nilness = true,
+            -- },
+            -- staticcheck = true,
+            -- usePlaceholders = true,
+            -- completeUnimported = true,
+            -- gofumpt = true,
+        -- },
+    -- },
 })
 lspconfig.hls.setup({
 	capabilities = capabilities,
@@ -96,6 +109,18 @@ lspconfig.lua_ls.setup({
 	capabilities = capabilities,
 	on_attach = on_attach,
 })
+lspconfig.nginx_language_server.setup({
+	capabilities = capabilities,
+	on_attach = on_attach,
+})
+lspconfig.pyright.setup({
+	capabilities = capabilities,
+	on_attach = on_attach,
+})
+lspconfig.rust_analyzer.setup({
+	capabilities = capabilities,
+	on_attach = on_attach,
+})
 lspconfig.zls.setup({
 	capabilities = capabilities,
 	on_attach = on_attach,
@@ -105,12 +130,4 @@ lspconfig.zls.setup({
 			enable_build_on_save = true,
 		},
 	},
-})
-lspconfig.nginx_language_server.setup({
-	capabilities = capabilities,
-	on_attach = on_attach,
-})
-lspconfig.rust_analyzer.setup({
-	capabilities = capabilities,
-	on_attach = on_attach,
 })
