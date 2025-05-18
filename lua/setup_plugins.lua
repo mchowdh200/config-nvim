@@ -207,11 +207,29 @@ require("lazy").setup({
 				require("config.obsidian")
 			end,
 		},
-
 		{
 			"nvim-lualine/lualine.nvim",
+			enabled = function()
+			    -- only load if not in tmux
+			    return vim.env.TMUX == nil
+			end,
+
 			config = function()
 				require("config.lualine")
+				-- Avoid duplicate lualine on changing colorscheme
+				local lualine_nvim_opts = require("lualine.utils.nvim_opts")
+				local base_set = lualine_nvim_opts.set
+
+				lualine_nvim_opts.set = function(name, val, scope)
+					if vim.env.TMUX ~= nil and name == "statusline" then
+						if scope and scope.window == vim.api.nvim_get_current_win() then
+							vim.g.tpipeline_statusline = val
+							vim.cmd("silent! call tpipeline#update()")
+						end
+						return
+					end
+					return base_set(name, val, scope)
+				end
 			end,
 		},
 		{ "junegunn/limelight.vim" },
@@ -231,6 +249,13 @@ require("lazy").setup({
 
 		-- Tmux ---------------------------------------------------------------
 		{ "tmux-plugins/vim-tmux-focus-events" },
+		{
+			"vimpostor/vim-tpipeline",
+			lazy = false,
+			config = function()
+				require("config.tpipeline")
+			end,
+		},
 
 		-- Themes -------------------------------------------------------------
 		{
@@ -268,6 +293,32 @@ require("lazy").setup({
 			config = function()
 				vim.g.zig_fmt_autosave = 0
 			end,
+		},
+
+		-- Jupyter notebooks in neovim
+		{
+			"benlubas/molten-nvim",
+			version = "^1.0.0", -- use version <2.0.0 to avoid breaking changes
+			dependencies = { "3rd/image.nvim" },
+			build = ":UpdateRemotePlugins",
+			init = function()
+				-- these are examples, not defaults. Please see the readme
+				vim.g.molten_image_provider = "image.nvim"
+				vim.g.molten_output_win_max_height = 20
+			end,
+		},
+		{
+			-- see the image.nvim readme for more information about configuring this plugin
+			"3rd/image.nvim",
+			opts = {
+				backend = "kitty", -- whatever backend you would like to use
+				max_width = 100,
+				max_height = 12,
+				max_height_window_percentage = math.huge,
+				max_width_window_percentage = math.huge,
+				window_overlap_clear_enabled = true, -- toggles images when windows are overlapped
+				window_overlap_clear_ft_ignore = { "cmp_menu", "cmp_docs", "" },
+			},
 		},
 	},
 })

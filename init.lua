@@ -4,6 +4,7 @@ require("config.mappings")
 -------------------------------------------------------------------------------
 -- Appearance
 -------------------------------------------------------------------------------
+vim.opt.termguicolors = true
 local dark_theme = "tokyonight-storm"
 local light_theme = "tokyonight-day"
 -- local dark_theme = "catppuccin-mocha"
