@@ -45,6 +45,7 @@ require("lazy").setup({
 			dependencies = {
 				"onsails/lspkind.nvim",
 				"williamboman/mason.nvim",
+				"hrsh7th/nvim-cmp",
 			},
 			config = function()
 				require("lsp")
@@ -86,6 +87,7 @@ require("lazy").setup({
 		-- cmp ----------------------------------------------------------------
 		{
 			"hrsh7th/nvim-cmp",
+			lazy = true,
 			config = function()
 				require("completions")
 			end,
@@ -96,18 +98,26 @@ require("lazy").setup({
 		{ "hrsh7th/cmp-path" },
 		{ "hrsh7th/cmp-cmdline" },
 
+		-- {
+		-- 	"saghen/blink.cmp",
+		-- 	version = "1.*",
+		-- 	config = function()
+		-- 		require("completions")
+		-- 	end,
+		-- },
+
 		{
 			"L3MON4D3/LuaSnip",
 			-- follow latest release.
 			version = "v2.*", -- Replace <CurrentMajor> by the latest released major (first number of latest release)
 		},
 
-		{
-			"github/copilot.vim",
-			config = function()
-				require("config.copilot")
-			end,
-		},
+		-- {
+		-- 	"github/copilot.vim",
+		-- 	config = function()
+		-- 		require("config.copilot")
+		-- 	end,
+		-- },
 		{
 			"olimorris/codecompanion.nvim",
 			config = function()
@@ -118,14 +128,21 @@ require("lazy").setup({
 				"nvim-treesitter/nvim-treesitter",
 			},
 		},
-		-- {
-		-- 	"ggml-org/llama.vim",
-		-- 	init = function()
-		-- 		vim.g.llama_config = {
-		-- 			show_info = 0,
-		-- 		}
-		-- 	end,
-		-- },
+		{
+			"ggml-org/llama.vim",
+			init = function()
+				vim.g.llama_config = {
+					show_info = 0,
+					keymap_accept_word = "<C-L>",
+					stop_strings = { "\n" },
+				}
+				local comment_hl = vim.api.nvim_get_hl(0, { name = "Comment" })
+				vim.api.nvim_set_hl(0, "llama_hl_hint", {
+					fg = comment_hl.fg,
+					bg = comment_hl.bg,
+				})
+			end,
+		},
 
 		-- Treesitter ---------------------------------------------------------
 		{
@@ -195,6 +212,7 @@ require("lazy").setup({
 				--   `nvim-notify` is only needed, if you want to use the notification view.
 				--   If not available, we use `mini` as the fallback
 				"rcarriga/nvim-notify",
+				"hrsh7th/nvim-cmp",
 			},
 		},
 		{
@@ -210,8 +228,8 @@ require("lazy").setup({
 		{
 			"nvim-lualine/lualine.nvim",
 			enabled = function()
-			    -- only load if not in tmux
-			    return vim.env.TMUX == nil
+				-- only load if not in tmux
+				return vim.env.TMUX == nil
 			end,
 
 			config = function()
@@ -296,29 +314,52 @@ require("lazy").setup({
 		},
 
 		-- Jupyter notebooks in neovim
-		{
-			"benlubas/molten-nvim",
-			version = "^1.0.0", -- use version <2.0.0 to avoid breaking changes
-			dependencies = { "3rd/image.nvim" },
-			build = ":UpdateRemotePlugins",
-			init = function()
-				-- these are examples, not defaults. Please see the readme
-				vim.g.molten_image_provider = "image.nvim"
-				vim.g.molten_output_win_max_height = 20
-			end,
-		},
-		{
-			-- see the image.nvim readme for more information about configuring this plugin
-			"3rd/image.nvim",
-			opts = {
-				backend = "kitty", -- whatever backend you would like to use
-				max_width = 100,
-				max_height = 12,
-				max_height_window_percentage = math.huge,
-				max_width_window_percentage = math.huge,
-				window_overlap_clear_enabled = true, -- toggles images when windows are overlapped
-				window_overlap_clear_ft_ignore = { "cmp_menu", "cmp_docs", "" },
-			},
-		},
+		-- {
+		-- 	"benlubas/molten-nvim",
+		-- 	version = "^1.0.0", -- use version <2.0.0 to avoid breaking changes
+		-- 	dependencies = {
+		-- 		"3rd/image.nvim",
+		-- 		"quarto-dev/quarto-nvim",
+		-- 		"jmbuhr/otter.nvim",
+		-- 		"GCBallesteros/jupytext.nvim",
+		-- 	},
+		-- 	build = ":UpdateRemotePlugins",
+		-- 	init = function()
+		-- 		-- these are examples, not defaults. Please see the readme
+		-- 		vim.g.molten_image_provider = "image.nvim"
+		-- 		vim.g.molten_output_win_max_height = 20
+		-- 		vim.g.molten_auto_open_output = false
+		-- 		vim.g.molten_wrap_output = true
+		-- 		vim.g.molten_virt_text_output = true
+		-- 		vim.g.molten_virt_lines_off_by_1 = true
+		-- 	end,
+		-- 	config = function()
+		-- 		require("config.quarto")
+		-- 		require("jupytext").setup({
+		-- 			style = "markdown",
+		-- 			output_extension = "md",
+		-- 			force_ft = "markdown",
+		-- 		})
+		-- 		require("config.molten")
+		-- 	end,
+		-- },
+		-- {
+		-- 	-- see the image.nvim readme for more information about configuring this plugin
+		-- 	"3rd/image.nvim",
+		-- 	opts = {
+		-- 		backend = "kitty", -- whatever backend you would like to use
+		-- 		max_width = 100,
+		-- 		max_height = 12,
+		-- 		max_height_window_percentage = math.huge,
+		-- 		max_width_window_percentage = math.huge,
+		-- 		window_overlap_clear_enabled = true, -- toggles images when windows are overlapped
+		-- 		window_overlap_clear_ft_ignore = { "cmp_menu", "cmp_docs", "" },
+		-- 	},
+		-- },
+		-- {
+		-- 	"lukas-reineke/headlines.nvim",
+		-- 	dependencies = "nvim-treesitter/nvim-treesitter",
+		-- 	config = true, -- or `opts = {}`
+		-- },
 	},
 })

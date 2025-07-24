@@ -40,11 +40,11 @@ vim.opt.fileformat = "unix"
 vim.wo.wrap = false
 -- Enable word wrap for Markdown files
 vim.api.nvim_create_autocmd("FileType", {
-  pattern = "markdown",
-  callback = function()
-    vim.opt_local.wrap = true
-    vim.opt_local.linebreak = true
-  end,
+	pattern = "markdown",
+	callback = function()
+		vim.opt_local.wrap = true
+		vim.opt_local.linebreak = true
+	end,
 })
 vim.opt.autochdir = true
 vim.opt.swapfile = false
@@ -54,8 +54,8 @@ vim.opt.backspace = "eol,start,indent"
 vim.opt.whichwrap:append("<,>,h,l")
 vim.opt.ruler = true
 vim.opt.signcolumn = "yes"
-vim.opt.showcmd = true
-vim.opt.showmode = true
+-- vim.opt.showcmd = true
+-- vim.opt.showmode = true
 vim.opt.scrolloff = 4
 vim.opt.hlsearch = true
 vim.opt.incsearch = true
